@@ -1,0 +1,10 @@
+{
+  "description": "Showcases the company's expertise in system development through engaging visuals and informative content, enhancing user attraction and SEO performance.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

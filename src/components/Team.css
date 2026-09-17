@@ -1,0 +1,66 @@
+.team {
+  border-top: 1px solid rgba(29, 58, 122, 0.4);
+  background: var(--ground);
+}
+
+.team-grid {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.15rem;
+}
+
+.member {
+  padding: 1.85rem 1.6rem;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(12, 24, 56, 0.55), rgba(10, 20, 48, 0.35));
+  border: 1px solid rgba(29, 58, 122, 0.55);
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+.member:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-blue-3);
+}
+.member-avatar {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--color-paper);
+  background: linear-gradient(135deg, var(--color-blue-2), var(--color-blue));
+  border: 1px solid rgba(125, 163, 255, 0.4);
+}
+.member-name {
+  font-size: 1.2rem;
+  margin: 1rem 0 0.15rem;
+}
+.member-role {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-cyan);
+  margin-bottom: 0.7rem;
+}
+.member-body {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--color-mute);
+}
+
+@media (max-width: 1000px) {
+  .team-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 560px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+}

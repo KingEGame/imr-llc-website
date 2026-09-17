@@ -1,0 +1,65 @@
+.cta {
+  background: var(--ground);
+}
+
+.cta-band {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(2.5rem, 6vw, 4.5rem);
+  border-radius: 26px;
+  text-align: center;
+  background:
+    radial-gradient(80% 120% at 50% 0%, rgba(20, 83, 255, 0.35), transparent 70%),
+    linear-gradient(180deg, rgba(12, 24, 56, 0.9), rgba(10, 20, 48, 0.7));
+  border: 1px solid var(--color-line);
+}
+.cta-orb {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  left: 50%;
+  top: -60%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(25, 198, 255, 0.4), transparent 60%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+.cta-band .eyebrow {
+  justify-content: center;
+}
+.cta-title {
+  position: relative;
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 1rem auto 1rem;
+  max-width: 18ch;
+}
+.cta-sub {
+  position: relative;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.6;
+  color: var(--color-mute);
+  max-width: 44ch;
+  margin: 0 auto;
+}
+.cta-actions {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+.cta-mail {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-blue-4);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.cta-mail:hover {
+  color: var(--color-cyan);
+}

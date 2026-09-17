@@ -1,0 +1,59 @@
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-cyan);
+  box-shadow: 0 0 10px var(--color-cyan);
+  transition: opacity 0.25s ease;
+}
+
+.cursor-ring {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--color-blue-4);
+  mix-blend-mode: screen;
+  transition:
+    width 0.28s ease,
+    height 0.28s ease,
+    background 0.28s ease,
+    border-color 0.28s ease,
+    opacity 0.25s ease;
+}
+
+.cursor-ring.is-hover {
+  width: 62px;
+  height: 62px;
+  border-color: var(--color-cyan);
+  background: rgba(25, 198, 255, 0.12);
+}
+
+.cursor-ring.is-down {
+  width: 26px;
+  height: 26px;
+}
+
+/* Hide the native cursor only when the custom one is active. */
+body.has-custom-cursor,
+body.has-custom-cursor a,
+body.has-custom-cursor button {
+  cursor: none;
+}
+
+@media (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}

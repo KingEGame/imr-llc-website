@@ -1,0 +1,25 @@
+.services {
+  position: relative;
+  background:
+    radial-gradient(50% 40% at 100% 0%, rgba(25, 198, 255, 0.06), transparent 70%),
+    var(--ground);
+}
+
+/* Tall track (6 disciplines) — drives the workstation's card-by-card zoom. */
+.services-track {
+  position: relative;
+  height: 600vh;
+}
+
+.services-stage {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.services-head {
+  max-width: 46ch;
+}

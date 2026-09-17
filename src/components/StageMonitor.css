@@ -1,0 +1,314 @@
+/* One persistent device, fixed to the viewport, drifting with scroll. */
+.stage-monitor {
+  position: fixed;
+  top: 50%;
+  right: clamp(1.5rem, 4vw, 4rem);
+  z-index: 5;
+  width: clamp(340px, 38vw, 560px);
+  pointer-events: none;
+  transform: translateY(-50%) translate(var(--mx, 0px), var(--my, 0px)) rotate(var(--rot, 0deg));
+  will-change: transform;
+}
+/* Re-enable interaction for the actual controls inside the screen. */
+.stage-monitor .btn,
+.stage-monitor a {
+  pointer-events: auto;
+}
+
+.stage-screen {
+  aspect-ratio: 16 / 10;
+  width: 100%;
+}
+
+.stage-panel {
+  position: absolute;
+  inset: 0;
+  animation: stage-in 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes stage-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* ---- Hero dashboard panel ---- */
+.stage-hero {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: clamp(0.8rem, 1.6vw, 1.2rem);
+}
+.stage-feed {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.stage-feed li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  color: var(--color-mute);
+  padding: 0.5rem 0.7rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(29, 58, 122, 0.45);
+}
+.feed-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: none;
+  animation: feed-pulse 2.4s ease-in-out infinite;
+}
+.feed-dot--cyan {
+  background: var(--color-cyan);
+  box-shadow: 0 0 12px var(--color-cyan);
+}
+.feed-dot--blue {
+  background: var(--color-blue-3);
+  box-shadow: 0 0 12px var(--color-blue-3);
+}
+.stage-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+.stage-metrics div {
+  padding: 0.7rem;
+  border-radius: 12px;
+  background: rgba(20, 83, 255, 0.08);
+  border: 1px solid rgba(29, 58, 122, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+.stage-metrics strong {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--color-cyan);
+}
+.stage-metrics span {
+  font-size: 0.7rem;
+  color: var(--color-mute-2);
+}
+.stage-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.stage-cta .btn {
+  font-size: 0.82rem;
+  padding: 0.6rem 1.1rem;
+}
+.stage-stats {
+  display: flex;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(29, 58, 122, 0.5);
+}
+.stage-stat {
+  display: flex;
+  flex-direction: column;
+}
+.stage-stat-num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  background: linear-gradient(120deg, var(--color-blue-4), var(--color-cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.stage-stat-lbl {
+  font-size: 0.68rem;
+  color: var(--color-mute-2);
+}
+
+/* ---- Services zoomable grid panel ---- */
+.stage-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: clamp(0.4rem, 1.1vw, 0.8rem);
+  padding: clamp(0.6rem, 1.4vw, 1rem);
+  transform-origin: 0 0;
+  transform: translate(var(--tx, 0px), var(--ty, 0px)) scale(var(--s, 1));
+  will-change: transform;
+}
+.scard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(0.6rem, 1.2vw, 1rem);
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(12, 24, 56, 0.7), rgba(10, 20, 48, 0.5));
+  border: 1px solid rgba(29, 58, 122, 0.55);
+  overflow: hidden;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+.scard.is-focus {
+  background: linear-gradient(180deg, rgba(15, 30, 70, 0.9), rgba(11, 22, 52, 0.7));
+  border-color: var(--color-blue-3);
+  box-shadow: 0 24px 50px -30px rgba(20, 83, 255, 0.8);
+}
+.scard-index {
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--color-cyan);
+}
+.scard-title {
+  font-size: clamp(0.78rem, 1.4vw, 1.05rem);
+  margin: 0.3rem 0;
+  letter-spacing: -0.01em;
+}
+.scard-body {
+  font-size: clamp(0.56rem, 0.95vw, 0.74rem);
+  line-height: 1.5;
+  color: var(--color-mute);
+}
+.scard-detail {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(29, 58, 122, 0.6);
+  font-size: clamp(0.5rem, 0.85vw, 0.66rem);
+  line-height: 1.55;
+  color: var(--color-mute-3);
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.4s ease,
+    opacity 0.4s ease,
+    margin 0.4s ease,
+    padding 0.4s ease;
+}
+.scard.is-focus .scard-detail {
+  max-height: 10rem;
+  opacity: 1;
+}
+
+/* ---- Work panel ---- */
+.stage-work {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: clamp(1rem, 2vw, 1.6rem);
+}
+.stage-work ul {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+}
+.stage-work li {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid rgba(29, 58, 122, 0.5);
+}
+.stage-work-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-cyan);
+  box-shadow: 0 0 10px var(--color-cyan);
+}
+.stage-work-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.stage-work-kind {
+  margin-left: auto;
+  font-size: 0.72rem;
+  color: var(--color-mute-2);
+  letter-spacing: 0.06em;
+}
+
+/* ---- Generic / CTA panels ---- */
+.stage-generic {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: clamp(1.2rem, 2.6vw, 2rem);
+}
+.stage-eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-cyan);
+}
+.stage-title {
+  font-size: clamp(1.5rem, 3vw, 2.3rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.stage-sub {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--color-mute);
+  max-width: 32ch;
+}
+.stage-generic--cta .btn {
+  margin-top: 0.6rem;
+}
+
+/* ---- Responsive: dock to the bottom on narrow screens ---- */
+@media (max-width: 1023px) {
+  .stage-monitor {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: none;
+    transform: none;
+    padding: 0 1rem 0.75rem;
+    background: linear-gradient(180deg, transparent, rgba(7, 11, 28, 0.85) 40%);
+  }
+  .stage-screen {
+    aspect-ratio: 16 / 7;
+  }
+  .stage-monitor .monitor-neck,
+  .stage-monitor .monitor-base {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage-panel {
+    animation: none;
+  }
+}

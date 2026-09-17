@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  /* Grounds */
+  --color-ink: #070b1c;
+  --color-ink-2: #0b1430;
+  --color-panel: #0c1838;
+  --color-panel-2: #0a1430;
+
+  /* Brand */
+  --color-blue: #1453ff;
+  --color-blue-2: #0b2a8f;
+  --color-blue-3: #4d7bff;
+  --color-blue-4: #7da3ff;
+  --color-cyan: #19c6ff;
+
+  /* Text */
+  --color-paper: #ffffff;
+  --color-mute: #aab6d6;
+  --color-mute-2: #8b97ba;
+  --color-mute-3: #9fb0d6;
+
+  /* Hairlines */
+  --color-line: #1d3a7a;
+
+  /* Translucent section grounds — let the fixed WebGL scene glow through. */
+  --ground: rgba(7, 11, 28, 0.62);
+  --ground-2: rgba(11, 20, 48, 0.55);
+
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Solid base sits behind the fixed WebGL scene. */
+  background-color: var(--color-ink);
+}
+
+body {
+  margin: 0;
+  background-color: transparent;
+  color: var(--color-paper);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  margin: 0;
+}
+
+::selection {
+  background: var(--color-blue);
+  color: var(--color-paper);
+}
+
+/* Surface scrollbars only while scrolling */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+*:hover {
+  scrollbar-color: var(--color-line) transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---- Shared primitives used across sections ---- */
+.shell {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-cyan);
+}
+.eyebrow::before {
+  content: '';
+  width: 1.75rem;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-blue), var(--color-cyan));
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+.btn:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 3px;
+}
+.btn-primary {
+  color: var(--color-paper);
+  background: linear-gradient(120deg, var(--color-blue), var(--color-cyan));
+  box-shadow: 0 12px 34px -14px rgba(20, 83, 255, 0.9);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 44px -14px rgba(25, 198, 255, 0.85);
+}
+.btn-ghost {
+  color: var(--color-paper);
+  background: rgba(255, 255, 255, 0.02);
+  border-color: var(--color-line);
+}
+.btn-ghost:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-blue-3);
+  background: rgba(20, 83, 255, 0.1);
+}
+
+/* Content stacks above the fixed WebGL scene (z-index 0). */
+.page-main,
+.foot {
+  position: relative;
+  z-index: 1;
+}
+
+/* Reserve room for the persistent StageMonitor so copy never sits under it. */
+@media (min-width: 1024px) {
+  .page-main,
+  .foot {
+    padding-right: clamp(360px, 40vw, 600px);
+  }
+}
+@media (max-width: 1023px) {
+  .page-main {
+    padding-bottom: 32vh;
+  }
+  .foot {
+    padding-bottom: 34vh;
+  }
+}
+
+.section {
+  padding: clamp(4rem, 8vw, 7rem) 0;
+  position: relative;
+}
+.section-title {
+  font-size: clamp(1.8rem, 3.6vw, 2.9rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin: 1rem 0 0.9rem;
+  max-width: 22ch;
+}
+.section-lead {
+  font-size: clamp(1rem, 1.3vw, 1.12rem);
+  line-height: 1.6;
+  color: var(--color-mute);
+  max-width: 52ch;
+}

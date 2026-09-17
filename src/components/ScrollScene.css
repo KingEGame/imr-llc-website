@@ -1,0 +1,26 @@
+/* Site-wide fixed WebGL layer behind all content. */
+.scroll-scene {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.scroll-scene canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Subtle vignette so text over the scene stays legible at the edges. */
+.scroll-scene::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    110% 90% at 50% 40%,
+    transparent 0%,
+    rgba(7, 11, 28, 0.55) 100%
+  );
+}
